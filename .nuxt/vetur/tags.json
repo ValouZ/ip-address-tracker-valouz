@@ -1,0 +1,14 @@
+{
+  "AddressCard": {
+    "description": "Auto imported from components/AddressCard.vue"
+  },
+  "AddressInput": {
+    "description": "Auto imported from components/AddressInput.vue"
+  },
+  "Header": {
+    "description": "Auto imported from components/Header.vue"
+  },
+  "Map": {
+    "description": "Auto imported from components/Map.vue"
+  }
+}
