@@ -8,7 +8,7 @@ import NuxtBuildIndicator from './components/nuxt-build-indicator'
 
 import '..\\assets\\styles\\styles.scss'
 
-import '..\\..\\node_modules\\leaflet\\dist\\leaflet.css'
+import '..\\node_modules\\leaflet\\dist\\leaflet.css'
 
 import _6f6c098b from '..\\layouts\\default.vue'
 
