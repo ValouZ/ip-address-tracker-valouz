@@ -52,7 +52,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     "@nuxtjs/axios",
-    ["nuxt-leaflet", {}]
+    "nuxt-leaflet"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
