@@ -6,7 +6,15 @@
       placeholder="Search for any IPv4 address or domain"
       v-model="inputAddress"
     />
-    <button class="button-ip" @click="fetch(inputAddress)">
+    <button
+      class="button-ip"
+      @click="
+        () => {
+          fetch(inputAddress);
+          resetInput();
+        }
+      "
+    >
       <img src="@/assets/images/svg/icon-arrow.svg" alt="Valider l'adresse" />
     </button>
   </div>
@@ -21,6 +29,9 @@ export default {
     };
   },
   methods: {
+    resetInput() {
+      this.inputAddress = "";
+    },
     ...mapActions(["fetch"])
   }
 };
@@ -33,7 +44,7 @@ export default {
   height: 58px;
   @extend %shadow;
   border-radius: 15px;
-  @include desktop{
+  @include desktop {
     width: 555px;
   }
 }
@@ -46,9 +57,9 @@ export default {
   padding-left: 24px;
   font-size: 18px;
   outline: none;
-  &::placeholder{
+  &::placeholder {
     font-size: 12px;
-    @include desktop{
+    @include desktop {
       font-size: 18px;
     }
   }
