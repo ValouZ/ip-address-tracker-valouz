@@ -1,5 +1,5 @@
 <template>
-  <div id="map-wrap" class="map">
+  <div class="map">
     <client-only>
         <l-map :zoom="14" :center="[searchedAddress.location.lat, searchedAddress.location.lng]">
         <l-tile-layer
