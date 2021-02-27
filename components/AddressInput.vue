@@ -8,6 +8,8 @@
     />
     <button
       class="button-ip"
+      :class="inputAddress.match(ipReg) ? 'correct' : 'wrong'"
+      :disabled="inputAddress.match(ipReg) ? false : true"
       @click="
         () => {
           fetch(inputAddress);
@@ -25,7 +27,8 @@ import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      inputAddress: ""
+      inputAddress: "",
+      ipReg: /^(?!127\.0{1,3}\.0{1,3}\.0{0,2}1$)((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/
     };
   },
   methods: {
@@ -76,6 +79,15 @@ export default {
   outline: none;
   &:hover {
     background: lighten($color: #000000, $amount: 20);
+    cursor: pointer;
+  }
+  &.wrong {
+    opacity: 0.5;
+    background: #610a0a;
+    &:hover {
+      background: #610a0a;
+      cursor: initial;
+    }
   }
 }
 </style>
