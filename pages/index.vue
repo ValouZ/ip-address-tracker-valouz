@@ -5,14 +5,19 @@
       <AddressInput />
       <AddressCard class="card" />
     </section>
-    <section class="map">
+    <section v-if="searchedAddress.location" class="map">
       <Map />
     </section>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapState } from "vuex";
+export default {
+  computed: {
+    ...mapState(["searchedAddress"])
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -26,9 +31,13 @@ export default {};
   align-items: center;
   position: relative;
   background: center center / cover url("@/assets/images/png/pattern-bg.png");
-  height: 300px;
+  height: var(--top-section-height);
   width: 100%;
   padding-top: 26px;
+
+  @include desktop{
+    padding-top: 33px;
+  }
 }
 .title {
   margin-bottom: 29px;
@@ -37,11 +46,15 @@ export default {};
   position: absolute;
   top: calc(100% - 133px);
   z-index: 1;
+
+  @include desktop{
+    top: calc(100% - 80px);
+  }
 }
 .map {
   position: relative;
   z-index: 0;
-  height: calc(100vh - 300px);
+  height: calc(100vh - var(--top-section-height));
   width: 100%;
 }
 </style>

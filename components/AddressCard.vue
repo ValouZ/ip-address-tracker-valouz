@@ -1,59 +1,50 @@
 <template>
-  <div class="card" @onload="addAddress(ipAddress[0])">
-    <!-- <template v-if="searchedAddress != ''"> -->
-    <div class="adress">
-      <h2>ip address</h2>
-      <p>{{ ipAddress.ip }}</p>
-    </div>
-
-    <div class="location">
-      <h2>location</h2>
-      <p>{{ ipAddress.location.city }}, {{ ipAddress.location.country }}</p>
-    </div>
-
-    <div class="timezone">
-      <h2>timezone</h2>
-      <p>UTC {{ ipAddress.location.timezone }}</p>
-    </div>
-
-    <div class="isp">
-      <h2>isp</h2>
-      <p>{{ ipAddress.isp }}</p>
-    </div>
-    <!-- </template> -->
-    <!-- <template v-else>
-      <div class="empty">
-        Waiting for a research...
+  <div class="card" :class="searchedAddress != '' ? 'display' : 'empty'">
+    <template v-if="searchedAddress != ''">
+      <div class="address loaded">
+        <h2>ip address</h2>
+        <p>{{ searchedAddress.ip }}</p>
       </div>
-    </template> -->
+
+      <div class="location loaded dash ">
+        <h2>location</h2>
+        <p>
+          {{ searchedAddress.location.city }},
+          {{ searchedAddress.location.country }}
+        </p>
+      </div>
+
+      <div class="timezone loaded dash">
+        <h2>timezone</h2>
+        <p>UTC {{ searchedAddress.location.timezone }}</p>
+      </div>
+
+      <div class="isp loaded dash">
+        <h2>isp</h2>
+        <p>{{ searchedAddress.isp }}</p>
+      </div>
+    </template>
+    <template v-else>
+      <div>
+        <p>Loading...</p>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
-  //  https://geo.ipify.org/api/v1
-  mounted() {
-    console.log("Component has been created!");
+  created() {
+    this.fetch();
   },
-  data() {
-    return {
-      ipAddress: []
-    };
-  },
-  watch: {
-    "$route.query": "$fetch"
-  }, // censé écouter les changements de requetes pour refaire le fetch quand il y a un changement
-  async fetch() {
-    this.ipAddress = await fetch(
-      `https://geo.ipify.org/api/v1?apiKey=at_DhEPRdhWsMzrv1mtqt3Nmk6oIY0kM&ipAddress=${this.searchedAddress}` // searchedAddress est le problème
-    ).then(res => res.json());
-  },
+
   computed: {
     ...mapState(["searchedAddress"])
   },
+
   methods: {
-    ...mapMutations(["addAddress"])
+    ...mapActions(["fetch"])
   }
 };
 </script>
@@ -69,8 +60,44 @@ export default {
   border-radius: 15px;
   background: white;
   padding: 26px 0;
-  div {
+  @extend %shadow;
+
+  @include desktop {
+    flex-direction: row;
+    align-items: initial;
+    justify-content: space-between;
+    width: 1110px;
+    height: 161px;
+    padding: 0 32px;
+    padding-top: 37px;
+
+    &.empty {
+      justify-content: center;
+      align-items: center;
+      padding-top: 0px;
+    }
+  }
+  .loaded {
     text-align: center;
+    @include desktop {
+      text-align: left;
+      width: 213px;
+    }
+  }
+}
+
+.dash {
+  position: relative;
+  @include desktop {
+    &::before {
+      content: "";
+      position: absolute;
+      left: -32px;
+      top: 6px;
+      height: 75px;
+      width: 1px;
+      background: rgba($color: #000000, $alpha: 0.15);
+    }
   }
 }
 
@@ -82,6 +109,11 @@ h2 {
   line-height: 12px;
   letter-spacing: 1.45833px;
   margin-bottom: 7px;
+
+  @include desktop {
+    font-size: 12px;
+    margin-bottom: 13px;
+  }
 }
 
 p {
@@ -90,5 +122,9 @@ p {
   font-weight: 500;
   line-height: 24px;
   letter-spacing: -0.178571px;
+
+  @include desktop {
+    font-size: 26px;
+  }
 }
 </style>

@@ -3,25 +3,25 @@
     <input
       class="input-ip"
       type="text"
-      placeholder="XXX.XXX.XXX.XXX"
-      v-model="address"
+      placeholder="Search for any IPv4 address or domain"
+      v-model="inputAddress"
     />
-    <button class="button-ip" @click="addAddress(address)">
+    <button class="button-ip" @click="fetch(inputAddress)">
       <img src="@/assets/images/svg/icon-arrow.svg" alt="Valider l'adresse" />
     </button>
   </div>
 </template>
 
 <script>
-import { mapMutations } from "vuex";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
-      address: ""
+      inputAddress: ""
     };
   },
   methods: {
-    ...mapMutations(["addAddress"])
+    ...mapActions(["fetch"])
   }
 };
 </script>
@@ -31,6 +31,11 @@ export default {
   display: flex;
   width: 327px;
   height: 58px;
+  @extend %shadow;
+  border-radius: 15px;
+  @include desktop{
+    width: 555px;
+  }
 }
 
 .input-ip {
@@ -41,6 +46,12 @@ export default {
   padding-left: 24px;
   font-size: 18px;
   outline: none;
+  &::placeholder{
+    font-size: 12px;
+    @include desktop{
+      font-size: 18px;
+    }
+  }
 }
 
 .button-ip {
@@ -51,6 +62,7 @@ export default {
   border: none;
   border-radius: 0 15px 15px 0;
   transition: 0.1s;
+  outline: none;
   &:hover {
     background: lighten($color: #000000, $amount: 20);
   }

@@ -1,19 +1,23 @@
 <template>
   <div id="map-wrap" class="map">
     <client-only>
-      <l-map :zoom="13" :center="[48.82104, 2.27718]">
+        <l-map :zoom="14" :center="[searchedAddress.location.lat, searchedAddress.location.lng]">
         <l-tile-layer
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
         ></l-tile-layer>
-        <l-marker :lat-lng="[48.82104, 2.27718]"></l-marker>
+        <l-marker :lat-lng="[searchedAddress.location.lat, searchedAddress.location.lng]"></l-marker>
       </l-map>
     </client-only>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
 export default {
   //@/assets/images/svg/icon-location.svg
+  computed: {
+    ...mapState(["searchedAddress"])
+  }
 };
 </script>
 

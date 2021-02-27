@@ -59,5 +59,9 @@ export default {
   axios: {},
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {}
+  build: {
+    styleResources: {
+      scss: "assets/styles/styles.scss"
+    }
+  }
 };

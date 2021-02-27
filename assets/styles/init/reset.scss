@@ -10,4 +10,10 @@
 :root {
   --very-dark-gray: #2c2c2c;
   --dark-gray: #979797;
+  --top-section-height: 300px;
+  @include desktop{
+    --top-section-height: 280px;
+  }
 }
+
+

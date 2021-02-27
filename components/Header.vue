@@ -17,5 +17,10 @@
     font-weight: 500;
     line-height: 30px;
     letter-spacing: -0.232143px;
+
+    @include desktop{
+      font-size: 32px;
+      letter-spacing: -0.285714px;
+    }
   }
 </style>
