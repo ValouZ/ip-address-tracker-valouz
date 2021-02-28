@@ -5,17 +5,13 @@
       type="text"
       placeholder="Search for any IPv4 address or domain"
       v-model="inputAddress"
+      @keyup.enter="buttonActions()"
     />
     <button
       class="button-ip"
       :class="inputAddress.match(ipReg) ? 'correct' : 'wrong'"
       :disabled="inputAddress.match(ipReg) ? false : true"
-      @click="
-        () => {
-          fetch(inputAddress);
-          resetInput();
-        }
-      "
+      @click="buttonActions()"
     >
       <img src="@/assets/images/svg/icon-arrow.svg" alt="Valider l'adresse" />
     </button>
@@ -32,6 +28,10 @@ export default {
     };
   },
   methods: {
+    buttonActions() {
+      this.fetch(this.inputAddress);
+      this.resetInput();
+    },
     resetInput() {
       this.inputAddress = "";
     },
