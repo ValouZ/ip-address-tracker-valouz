@@ -3,7 +3,7 @@
     <input
       class="input-ip"
       type="text"
-      placeholder="Search for any IPv4 address or domain"
+      placeholder="Search for any IPv4 address"
       v-model="inputAddress"
       @keyup.enter="buttonActions()"
     />

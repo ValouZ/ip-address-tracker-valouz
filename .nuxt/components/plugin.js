@@ -1,6 +1,7 @@
 import Vue from 'vue'
 
 const components = {
+  Adblock: () => import('../..\\components\\Adblock.vue' /* webpackChunkName: "components/adblock" */).then(c => c.default || c),
   AddressCard: () => import('../..\\components\\AddressCard.vue' /* webpackChunkName: "components/address-card" */).then(c => c.default || c),
   AddressInput: () => import('../..\\components\\AddressInput.vue' /* webpackChunkName: "components/address-input" */).then(c => c.default || c),
   Header: () => import('../..\\components\\Header.vue' /* webpackChunkName: "components/header" */).then(c => c.default || c),

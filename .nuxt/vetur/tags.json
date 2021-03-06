@@ -1,4 +1,7 @@
 {
+  "Adblock": {
+    "description": "Auto imported from components/Adblock.vue"
+  },
   "AddressCard": {
     "description": "Auto imported from components/AddressCard.vue"
   },

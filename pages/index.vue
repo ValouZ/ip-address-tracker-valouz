@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Adblock v-if="adBlock" />
     <section class="top-section">
       <Header class="title" />
       <AddressInput />
@@ -13,7 +14,25 @@
 
 <script>
 import { mapState } from "vuex";
+import { detectAnyAdblocker } from "just-detect-adblock";
+
 export default {
+  beforeMount() {
+    detectAnyAdblocker().then(detected => {
+      if (detected) {
+        console.log("true");
+        this.adBlock = true;
+      } else {
+        console.log("false");
+        this.adBlock = false;
+      }
+    });
+  },
+  data() {
+    return {
+      adBlock: false
+    };
+  },
   computed: {
     ...mapState(["searchedAddress"])
   }
@@ -35,7 +54,7 @@ export default {
   width: 100%;
   padding-top: 26px;
 
-  @include desktop{
+  @include desktop {
     padding-top: 33px;
   }
 }
@@ -47,7 +66,7 @@ export default {
   top: calc(100% - 133px);
   z-index: 1;
 
-  @include desktop{
+  @include desktop {
     top: calc(100% - 80px);
   }
 }
